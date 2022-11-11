@@ -4,7 +4,7 @@ const { Sequelize } = require('sequelize');
 
 module.exports = db = {};
 
-initialize();
+// initialize();
 
 async function initialize() {
     // create db if it doesn't already exist
