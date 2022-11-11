@@ -1,0 +1,203 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: node-mysql-crud-api
+servers:
+  - url: '{host}'
+    variables:
+      host:
+        default: 'http://localhost:4000'
+paths:
+  /.well-known/ping:
+    get:
+      tags:
+        - well-known
+      security: []
+      responses:
+        '200':
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+        '500':
+          description: 500 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '502':
+          description: 502 response
+        '503':
+          description: 503 response
+  /users:
+    post:
+      tags:
+        - users
+      security: []
+      summary: Create a new user
+      description: Create a new user with details
+      operationId: create-user
+      requestBody:
+        description: Update an existent pet in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+        required: true
+      responses:
+        '201':
+          description: 201 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCreate'
+        '500':
+          description: 500 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '502':
+          description: 502 response
+        '503':
+          description: 503 response
+    get:
+      tags:
+        - users
+      security: []
+      summary: get list of all users
+      description: Get list of all users
+      operationId: get-user
+      responses:
+        '200':
+          description: 201 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCreate'
+        '500':
+          description: 500 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '502':
+          description: 502 response
+        '503':
+          description: 503 response
+  /users/{id}:
+    get:
+      tags:
+        - users
+      security: []
+      summary: get User by id
+      description: Get User by id
+      operationId: get-user-by-id
+      parameters:
+        - name: id
+          in: path
+          description: id of the user
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCreate'
+        '500':
+          description: 500 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '502':
+          description: 502 response
+        '503':
+          description: 503 response
+    delete:
+      tags:
+        - users
+      security: []
+      summary: Delete user by id
+      description: Delete user by id
+      operationId: delete-user-by-id
+      parameters:
+        - name: id
+          in: path
+          description: id of the user
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: 200 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCreate'
+        '500':
+          description: 500 response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '502':
+          description: 502 response
+        '503':
+          description: 503 response
+
+components:
+  schemas:
+    Empty:
+      type: object
+    Error:
+      type: object
+      required:
+        - errors
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              title:
+                description: title
+                type: string
+              detail:
+                description: detail
+                type: string
+    UserCreate:
+      required:
+        - email
+      type: object
+      properties:
+        email:
+          type: string
+          example: softwarepecharcha@gmail.com
+        title:
+          type: string
+          example: Mr
+        firstName:
+          type: string
+          example: Manjit
+        lastName:
+          type: string
+          example: Manjit
+        role:
+          type: string
+          example: Admin
+        password:
+          type: string
+          example: 123456789
+        confirmPassword:
+          type: string
+          example: 123456789
+
+
+
