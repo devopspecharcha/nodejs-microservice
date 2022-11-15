@@ -3,7 +3,9 @@ pipeline {
 
     stages {
         stage("Checkout scm") {
-            checkout scm
+            steps {
+                checkout scm
+            }
         } 
 
         stage("List out folders") {
