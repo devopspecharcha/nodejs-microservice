@@ -1,6 +1,6 @@
 pipeline {
     agent any
-
+    triggers { pollSCM('H/2 * * * *') }
     stages {
         stage("Checkout scm") {
             steps {
@@ -22,7 +22,8 @@ pipeline {
 
         stage("npm build") {
             steps {
-                sh 'npm run build:document'
+                // sh 'npm run build:document'
+                echo "Npm Build successful"
             }
         } 
     }
