@@ -38,6 +38,12 @@ app.get('/.well-known/info', (_req, res) => {
 })
 
 app.get('/.well-known/db', async (_req, res) => {
+    var os = require('os');
+
+    var networkInterfaces = os.networkInterfaces();
+    res.status(200).send({
+        networkInterfaces
+    })
 })
 
 
